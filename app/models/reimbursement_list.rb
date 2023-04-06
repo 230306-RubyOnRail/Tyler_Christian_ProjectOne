@@ -1,11 +1,11 @@
-require_relative '../../lib/completable'
-class TodoList < ApplicationRecord
-  include Completable
+#require_relative '../../lib/completable'
+class ReimbursementList < ApplicationRecord
+  #include Completable
   belongs_to :user
-  has_many :todos, dependent: :destroy
+  #has_many :reimbursements, dependent: :destroy
   validates :title, presence: true
-
+  self.primary_key = 'reimbursement_id'
   def completed?
-    todos.all?(&:completed?)
+    reimbursements.all?(&:completed?)
   end
 end

@@ -1,7 +1,7 @@
 require_relative '../../lib/json_web_token'
 
 class SessionsController < ApplicationController
-  include PrintMessage
+  #include PrintMessage
   def create
     credentials = JSON.parse(request.body.read)
     user = User.where(email: credentials['email']).first
