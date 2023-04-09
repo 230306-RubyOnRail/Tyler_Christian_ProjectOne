@@ -1,4 +1,5 @@
 require_relative '../../lib/json_web_token'
+require_relative '../../lib/authenticate_helper'
 #require 'printmessage'
 class SessionsController < ApplicationController
   #include PrintMessage
@@ -10,13 +11,17 @@ class SessionsController < ApplicationController
     #session[:current_user] = User.new();
   end
   def create
+    #include TokenHelper
     credentials = JSON.parse(request.body.read)
     user = User.where(user_name: credentials['username']).first
+    #Token.tokencheck(user.id)
     if user&.authenticate(credentials['password'])
       puts "LOGIN SUCCESS!!!"
       
       session_token = JsonWebToken.encode(user_id: user.id)
       @outHash = { token: session_token, user_id: user.id}
+
+      
       #needs a way to store the token to the database'
       #------
       myToken = Token.create(user_id: user.id, token: session_token, tokentype: user.user_type, created_at: Time.now, updated_at: Time.now)

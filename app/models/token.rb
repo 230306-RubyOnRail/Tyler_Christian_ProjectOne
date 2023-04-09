@@ -12,5 +12,5 @@ class Token < ApplicationRecord
         Token.Where(token: t).first
         t == token
     end
-    
+ 
 end
