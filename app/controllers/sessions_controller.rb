@@ -1,6 +1,6 @@
 require_relative '../../lib/json_web_token'
-require_relative '../../lib/authenticate_helper'
-#require 'printmessage'
+#require_relative '../../lib/authenticate_helper'
+
 class SessionsController < ApplicationController
   #include PrintMessage
   #include 'bcrypt'
