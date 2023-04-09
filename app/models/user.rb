@@ -1,9 +1,13 @@
 class User < ApplicationRecord
-  has_many :reimbursement_lists, dependent: :destroy
+  include BCrypt
   
-  validates :name, presence: true
-  validates :email, presence: true, uniqueness: true
-  validates :password, presence: true, length: { minimum: 6 }
-  has_secure_password
+  has_many :reimbursement_lists, dependent: :destroy
+  #has_one :token, dependent: :destroy
+  #validates :name, presence: true
+  validates :user_name, presence: true, uniqueness: true
+  validates :user_type, presence: true
+  validates :user_password, presence: true, length: { minimum: 6 }
+  has_secure_password 
+  
   self.primary_key="user_id"
 end
