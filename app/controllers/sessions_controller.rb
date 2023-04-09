@@ -1,6 +1,6 @@
 require_relative '../../lib/json_web_token'
 #require_relative '../../lib/authenticate_helper'
-
+require_relative './concerns/Authenticatible'
 class SessionsController < ApplicationController
   #include PrintMessage
   #include 'bcrypt'
@@ -11,6 +11,7 @@ class SessionsController < ApplicationController
     #session[:current_user] = User.new();
   end
   def create
+    include Authenticatable
     #include TokenHelper
     credentials = JSON.parse(request.body.read)
     user = User.where(user_name: credentials['username']).first
