@@ -12,7 +12,7 @@ class ReimbursementsController < ApplicationController
 
   def create
     reimbursement_id = params[:reimbursement_id]
-    @reimbursement = Reimbursement.new(JSON.parse(request.body.read).merge(reimbursement_id: reimbursement_id))
+    @reimbursement = ReimbursementList.new(JSON.parse(request.body.read).merge(reimbursement_id: reimbursement_id))
     if @reimbursement.save
       render json: { reimbursement: @reimbursement }, status: :created
     else

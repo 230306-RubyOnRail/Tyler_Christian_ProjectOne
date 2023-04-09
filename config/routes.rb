@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   get '/reimbursement/:user_id', to: 'reimbursements#index'
   post '/login', to: 'sessions#create'
+  post '/submit', to: 'reimbursements#create' 
   put '/reimbursements/:reimbursement_id', to: 'reimbursements#update'
   
   #resources :reimbursements , params: ["reimbursement_id"]

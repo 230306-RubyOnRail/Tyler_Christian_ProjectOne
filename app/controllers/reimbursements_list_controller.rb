@@ -1,5 +1,5 @@
 class ReimbursementsListsController < ApplicationController
-  include Authenticatable
+  #include Authenticatable
   def index # GET /users/:user_id/lists
     @reimbursement_lists = ReimbursementList.includes(:reimbursements).where(user_id: current_user.id)
     render json: { reimbursement_lists: @reimbursement_lists }, status: :ok
