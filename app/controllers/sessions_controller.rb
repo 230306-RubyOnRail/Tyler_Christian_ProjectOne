@@ -1,8 +1,8 @@
 require_relative '../../lib/json_web_token'
-
+#require 'printmessage'
 class SessionsController < ApplicationController
   #include PrintMessage
-
+  #include 'bcrypt'
   #POST/Login;
   def create
     credentials = JSON.parse(request.body.read)

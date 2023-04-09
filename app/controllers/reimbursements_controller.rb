@@ -2,6 +2,7 @@ class ReimbursementsController < ApplicationController
 
   def index
     user = User.includes(:reimbursement_lists).where(user_id: params[:user_id]).first
+    #puts "#{user.user_id}"
     if user
       render json: { reimbursements: user.reimbursement_lists }, status: :ok
     else
