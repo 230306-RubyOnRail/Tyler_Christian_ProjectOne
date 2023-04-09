@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   post '/submit', to: 'reimbursements#create' 
   put '/reimbursements/:reimbursement_id', to: 'reimbursements#update'
-  
+  get '/myThing', to: 'sessions#myTest'
   #resources :reimbursements , params: ["reimbursement_id"]
 
   # Defines the root path route ("/")
