@@ -17,8 +17,6 @@ class SessionsController < ApplicationController
       
       session_token = JsonWebToken.encode(user_id: user.id)
       @outHash = { token: session_token, user_id: user.id}
-
-      
       #needs a way to store the token to the database'
       #------
       myToken = Token.create(user_id: user.id, token: session_token, tokentype: user.user_type, created_at: Time.now, updated_at: Time.now)
