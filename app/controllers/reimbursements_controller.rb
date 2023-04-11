@@ -9,7 +9,14 @@ class ReimbursementsController < ApplicationController
       head :not_found
     end
   end
-
+  #http://localhost:3000/submit
+  # {
+  #   "user_id":"1",
+  #   "descr":"test value",
+  #   "amount":"40.0",
+  #   "date_submitted":"2023-04-12 00:10:00",
+  #   "status":"UNSEEN"
+  # }
   def create
     reimbursement_id = params[:reimbursement_id]
     @reimbursement = ReimbursementList.new(JSON.parse(request.body.read).merge(reimbursement_id: reimbursement_id))
@@ -19,6 +26,9 @@ class ReimbursementsController < ApplicationController
       render json: @reimbursement.errors, status: :unprocessable_entity
     end
   end
+  #-----------------------------------------------------
+  #Show-----
+  #http://localhost:3000/reimbursement/2
   def show
     @reimbursement = Reimbursement.where(reimbursement_id: params[:reimbursement_id]).first
     if @reimbursement
@@ -27,7 +37,11 @@ class ReimbursementsController < ApplicationController
       head :not_found
     end
   end
-  def indexM#manager show
+  #-----------------------------------------------------
+  #manager show
+  #http://localhost:3000/reimbursement-manager/1
+  def indexM
+   
     #user = ActiveRecord::Base.connection.execute("SELECT * FROM  reimbursement_lists")
     @reimbursement = ReimbursementList.all();
     if  @reimbursement
@@ -38,7 +52,7 @@ class ReimbursementsController < ApplicationController
     end
   end
   def update
-    @reimbursement = Reimbursement.where(reimbursement_id: params[:reimbursement_id]).first
+    @reimbursement = ReimbursementList.where(reimbursement_id: params[:reimbursement_id]).first
     if @reimbursement
       if @reimbursement.update(JSON.parse(request.body.read))
         head :no_content
@@ -49,11 +63,20 @@ class ReimbursementsController < ApplicationController
       head :not_found
     end
   end
-
+  #-----------------------------------------------------
+  #Destroy a reimbursement
+  #http://localhost:3000/reimbursements_delete/6
   def destroy
-    @reimbursement = Reimbursement.where(id: params[:id], reimbursement_id: params[:reimbursement_id]).first
-    @reimbursement.destroy if @reimbursement
-    head :no_content
+    @reimbursement = ReimbursementList.where(reimbursement_id: params[:reimbursement_id]).first
+    if  @reimbursement
+      #ReimbursementList.destroy(reimbursement_id: @reimbursement.reimbursement_id)
+      #render json: { reimbursements: user.to_json }, status: :ok
+      render json: { reimbursements: @reimbursement }, status: :ok
+      puts "HEY THERE THERE HEY";
+      @reimbursement.destroy();
+    else 
+      head :not_found
+    end
   end
 
 end
