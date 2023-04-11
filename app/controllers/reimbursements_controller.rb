@@ -27,7 +27,16 @@ class ReimbursementsController < ApplicationController
       head :not_found
     end
   end
-
+  def indexM#manager show
+    #user = ActiveRecord::Base.connection.execute("SELECT * FROM  reimbursement_lists")
+    @reimbursement = ReimbursementList.all();
+    if  @reimbursement
+      #render json: { reimbursements: user.to_json }, status: :ok
+      render json: { reimbursements: @reimbursement }, status: :ok
+    else 
+      head :not_found
+    end
+  end
   def update
     @reimbursement = Reimbursement.where(reimbursement_id: params[:reimbursement_id]).first
     if @reimbursement
