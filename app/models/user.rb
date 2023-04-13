@@ -15,7 +15,7 @@ class User < ApplicationRecord
   self.primary_key="user_id"
   # def user_password_digest()
   # end
-
+  
   # def authenticate(pWord)
   #   pWord == user_password
   # end
