@@ -10,9 +10,11 @@ class SessionsController < ApplicationController
   end
   def create
     credentials = JSON.parse(request.body.read)
-    user = User.where(user_name: credentials['username']).first
+    #puts "USER: #{credentials['user_name']}-------- #{credentials['user_password']}"
+    user = User.where(user_name: credentials['user_name']).first
+    #puts "USER: =---- #{user.testr}"
     #Token.tokencheck(user.id)
-    if user&.authenticate(credentials['password'])
+    if user&.authenticate(credentials['user_password'])
       puts "LOGIN SUCCESS!!!"
       
       session_token = JsonWebToken.encode(user_id: user.id)
@@ -22,7 +24,7 @@ class SessionsController < ApplicationController
       #needs a way to store the token to the database'
       #------
       myToken = Token.create(user_id: user.id, token: session_token, tokentype: user.user_type, created_at: Time.now, updated_at: Time.now)
-      session[:current_user]=User.where(user_name: credentials['username']).first
+      session[:current_user]=User.where(user_name: credentials['user_name']).first
       puts "TOKEN: #{@outHash.to_json}- ID: #{session[:current_user].id}-----"
       render json: @outHash.to_json , status: :created
     else

@@ -16,13 +16,14 @@ class User < ApplicationRecord
   # def user_password_digest()
   # end
   
-  # def authenticate(pWord)
-  #   pWord == user_password
-  # end
-  # def confirm?
-  #   confirmed_at?
-  # end
-  # def testr
-  #   puts "user_id: #{self.user_id} user_name: #{self.user_name} user_password: #{self.user_password} user_type #{self.user_type}"
-  # end
+  def authenticate(pWord)
+    puts "Authenticating Password: #{pWord}"
+    pWord == self.user_password
+  end
+  def confirm?
+    confirmed_at?
+  end
+  def testr
+    puts "user_id: #{self.user_id} user_name: #{self.user_name} user_password: #{self.user_password} user_type #{self.user_type}"
+  end
 end
