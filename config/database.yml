@@ -25,8 +25,11 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: db/test.sqlite3
+  adapter: postgresql
+  database: postgres2
+  username: ruby_app
+  password: secretpassword
 
 production:
   <<: *default
-  database: db/production.sqlite3
+  database: db/production.sql
