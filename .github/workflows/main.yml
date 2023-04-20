@@ -1,0 +1,34 @@
+name: Ruby on Rails CI
+
+# when will this run
+on: 
+    push:
+        branches:
+            - main
+
+jobs:
+    build:
+        # start with an environment
+        runs-on: ubuntu-latest
+
+        steps:
+        - uses: actions/checkout@v2
+
+        - name: Setup Ruby
+          uses: ruby/setup-ruby@latest
+          with:
+            ruby-version: 3.2.2
+
+        - name: Install Dependencies
+          run: |
+            gem install bundler
+            bundle install --jobs 4 --retry 3
+
+        - name: Run Rubocop
+          run: bundle exec rubocop --auto-correct
+
+        - name: Run Unit Tests
+          run: bundle exec rails test
+
+        - name: Build the Docker image
+          run: docker build -t christianloring/myapp:latest .
