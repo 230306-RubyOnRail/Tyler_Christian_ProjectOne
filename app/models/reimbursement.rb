@@ -1,6 +1,6 @@
 #require_relative '../../lib/completable'
 
-class Reimbursements < ApplicationRecord
+class Reimbursement < ApplicationRecord
   #include Completable
 
   belongs_to :reimbursement_list
