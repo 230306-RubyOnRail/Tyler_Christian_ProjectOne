@@ -1,4 +1,4 @@
-class ReimbursementsListsController < ApplicationController
+class ReimbursementsListController < ApplicationController
   #weird 
   def index # GET /users/:user_id/lists
     @reimbursement_lists = ReimbursementList.includes(:reimbursements).where(user_id: current_user.id)
