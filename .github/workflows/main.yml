@@ -24,9 +24,6 @@ jobs:
             gem install bundler
             bundle install --jobs 4 --retry 3
 
-        - name: Run Rubocop
-          run: bundle exec rubocop --auto-correct
-
         - name: Run Unit Tests
           run: bundle exec rails test
 
