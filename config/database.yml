@@ -13,9 +13,9 @@ development:
   <<: *default
   adapter: postgresql
   database: postgres
-  username: ruby_app
-  password: secretpassword
-  host: localhost
+  username: postgres
+  password: supersimple
+  host: ruby-on-rails-230306.cbx8zbbcnonf.us-east-2.rds.amazonaws.com
   port: 5432
   timeout: 5000
   pool: 10
